@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     View,
     Text,
@@ -9,11 +9,31 @@ import {
 import colors from '../styles/colors';
 import { Header } from '../components/Header';
 import fonts from '../styles/fonts';
+import api from '../services/api';
 import { EnviromentButton } from '../components/EnviromentButton';
 
-
+interface EnvironmentProps {
+    key: string;
+    title: string;
+}
 export function PlantSelect(){
+    const[environments, setEnvironments] = useState<EnvironmentProps[]>();
 
+    useEffect(() =>{
+        async function fetchEnviroment(){
+            const { data } = await api.get('plants_environments');
+            setEnvironments([
+                {
+                    key: 'all',
+                    title: 'Todos',
+                },
+                ... data
+            ]);
+        }
+
+        fetchEnviroment();
+
+    },[])
 
     return (
         <View style={styles.container}>
@@ -25,11 +45,11 @@ export function PlantSelect(){
 
             <View>
                 <FlatList
-                    data={[1,2,3,4,5]}
+                    data={environments}
                     renderItem={({ item }) => (
                         <EnviromentButton 
-                            title='Cozinha'
-                            active
+                            title={item.title}
+                            
                         />
 
                     )}
