@@ -8,6 +8,8 @@ import {
 
 
 import Routes from './src/routes/index';
+import { View, StyleSheet, StatusBar } from 'react-native';
+
 
 export default function App(){
   const [ fontsLoaded ] = useFonts({
@@ -21,6 +23,17 @@ export default function App(){
   }
   
   return(
-    <Routes />
+    <>
+      <View>
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="#000000"
+          translucent={false}
+          networkActivityIndicatorVisible={true} />
+      </View>
+      
+      <Routes />
+    </>
   )
 }
