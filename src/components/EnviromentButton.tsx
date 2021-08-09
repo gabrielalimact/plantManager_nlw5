@@ -15,6 +15,7 @@ export function EnviromentButton({ title, active = false, ...rest } : Enviroment
         <RectButton 
             style={[
                 styles.container, 
+                active && styles.containerActive
                 ]} { ...rest }
         >
 
@@ -32,13 +33,13 @@ export function EnviromentButton({ title, active = false, ...rest } : Enviroment
 
 const styles = StyleSheet.create({
     container: {
+        marginRight: 5,
         backgroundColor: colors.shape,
         height: 40,
         width: 76,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 12,
-        
+        borderRadius: 12
     },
     containerActive:{
         backgroundColor: colors.green_light,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 13
     },
     textActive: {
-        color: colors.green,
+        color: colors.green_dark,
         fontFamily: fonts.heading,
         fontSize: 13
     }
