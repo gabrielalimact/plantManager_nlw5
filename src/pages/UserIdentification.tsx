@@ -8,23 +8,40 @@ import {
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Alert
 
 } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Button } from '../components/Button';
-import { useNavigation } from '@react-navigation/native';
 
 
 export function UserIdentification(){
     const [ isFocused, setIsFocused ] = useState(false);
     const [ isFilled, setIsFilled ] = useState(false);
     const [ name, setName ] = useState<string>();
+
     const navigation = useNavigation();
 
-    function handleSubmit(){
-        navigation.navigate('Confirmation');
+    async function handleSubmit(){
+        if(!name) { return Alert.alert('Me diz como chamar você 🙁')};
+
+        try{
+            await AsyncStorage.setItem('@plantmanager:user', name);
+            navigation.navigate('Confirmation', {
+                title: 'Prontinho',
+                subtitle: 'Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
+                buttonTitle: 'Começar',
+                icon: 'smile',
+                nextScreen: 'PlantSelect',
+            });
+        }catch{
+            Alert.alert('Não foi possível salvar o seu nome.')
+        }
     }
 
     function handleInputBlur(){
@@ -65,7 +82,8 @@ export function UserIdentification(){
                                 <TextInput 
                                     style={[
                                         styles.input, 
-                                        (isFocused || isFilled) && { borderColor: colors.green }
+                                        (isFocused || isFilled) && 
+                                        { borderColor: colors.green }
                                     ]}
                                     placeholder='Digite seu nome'
                                     onBlur={handleInputBlur}
