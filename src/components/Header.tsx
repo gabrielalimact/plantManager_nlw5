@@ -3,7 +3,7 @@ import { StyleSheet, Text, Image, View } from 'react-native';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import perfil from 'http://github.com/gabrielalimact.png';
+import perfil from '../assets/perfil.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 

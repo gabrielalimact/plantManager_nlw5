@@ -10,7 +10,7 @@ import {
 
 import { PlantCardSecondary } from '../components/PlantCardSecondary';
 import { Load } from '../components/Load';
-import { Header } from '../components/header';
+import { Header } from '../components/Header';
 import waterdrop from '../assets/waterdrop.png';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
